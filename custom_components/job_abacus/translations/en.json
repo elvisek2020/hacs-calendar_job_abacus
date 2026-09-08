@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Job Abacus Pro",
+        "description": "Enter the address of the canteen web client and your credentials. The integration only reads the menu, it never places orders.",
+        "data": {
+          "base_url": "Web client address",
+          "username": "Username",
+          "password": "Password"
+        },
+        "data_description": {
+          "base_url": "The address you sign in to, without `/login.php`. For example `http://server:51910`."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate",
+        "description": "The password for account {username} is no longer valid. Enter the current password.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the web client, or the response contained no menu.",
+      "invalid_auth": "Invalid username or password.",
+      "invalid_url": "The address must start with http:// or https://.",
+      "unknown": "Unexpected error.",
+      "no_menu": "Login succeeded but no menu could be found on the server."
+    },
+    "abort": {
+      "already_configured": "This account is already configured.",
+      "reauth_successful": "Re-authentication was successful."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Menu display",
+        "data": {
+          "summary_mode": "Event title"
+        },
+        "data_description": {
+          "summary_mode": "What appears as the calendar event title. The full daily menu is always in the description."
+        }
+      }
+    }
+  },
+  "selector": {
+    "summary_mode": {
+      "options": {
+        "ordered": "Ordered meal",
+        "all": "All meals of the day"
+      }
+    }
+  },
+  "entity": {
+    "calendar": {
+      "lunch": {
+        "name": "Lunches"
+      }
+    }
+  }
+}

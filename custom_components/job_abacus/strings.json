@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Job Abacus Pro",
+        "description": "Zadej adresu web klienta školní jídelny a přihlašovací údaje. Integrace pouze čte jídelníček, nic neobjednává.",
+        "data": {
+          "base_url": "Adresa web klienta",
+          "username": "Uživatelské jméno",
+          "password": "Heslo"
+        },
+        "data_description": {
+          "base_url": "Adresa, na které se přihlašuješ, bez `/login.php`. Například `http://server:51910`."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Znovu přihlásit",
+        "description": "Heslo účtu {username} už není platné. Zadej aktuální heslo.",
+        "data": {
+          "password": "Heslo"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nepodařilo se spojit s web klientem nebo v odpovědi nebyl jídelníček.",
+      "invalid_auth": "Neplatné uživatelské jméno nebo heslo.",
+      "invalid_url": "Adresa musí začínat na http:// nebo https://.",
+      "unknown": "Neočekávaná chyba.",
+      "no_menu": "Přihlášení prošlo, ale na serveru se nepodařilo najít žádný jídelníček."
+    },
+    "abort": {
+      "already_configured": "Tento účet je už přidaný.",
+      "reauth_successful": "Přihlášení bylo obnoveno."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Zobrazení jídelníčku",
+        "data": {
+          "summary_mode": "Název události"
+        },
+        "data_description": {
+          "summary_mode": "Co se ukáže jako název události v kalendáři. Celý jídelníček dne je vždy v popisu."
+        }
+      }
+    }
+  },
+  "selector": {
+    "summary_mode": {
+      "options": {
+        "ordered": "Objednané jídlo",
+        "all": "Všechna jídla dne"
+      }
+    }
+  },
+  "entity": {
+    "calendar": {
+      "lunch": {
+        "name": "Obědy"
+      }
+    }
+  }
+}

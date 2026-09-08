@@ -1,0 +1,12 @@
+{
+  "domain": "job_abacus",
+  "name": "Job Abacus Pro",
+  "codeowners": ["@elvisek2020"],
+  "config_flow": true,
+  "documentation": "https://github.com/elvisek2020/hacs-calendar_job_abacus",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/elvisek2020/hacs-calendar_job_abacus/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}
