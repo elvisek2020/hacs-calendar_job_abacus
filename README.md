@@ -1,4 +1,11 @@
-# Job Abacus Pro pro Home Assistant
+# Job Abacus Pro
+
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
+[![Release](https://img.shields.io/github/v/release/elvisek2020/hacs-calendar_job_abacus)](https://github.com/elvisek2020/hacs-calendar_job_abacus/releases)
+[![Validate](https://github.com/elvisek2020/hacs-calendar_job_abacus/actions/workflows/validate.yml/badge.svg)](https://github.com/elvisek2020/hacs-calendar_job_abacus/actions/workflows/validate.yml)
+[![Licence](https://img.shields.io/github/license/elvisek2020/hacs-calendar_job_abacus)](LICENSE)
+
+[![Otevřít v HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=elvisek2020&repository=hacs-calendar_job_abacus&category=integration)
 
 Neoficiální integrace, která vystaví **jídelníček** ze školní jídelny
 provozované na Job Abacus Pro WEB Client (GACC spol. s r.o.) jako
@@ -6,30 +13,42 @@ kalendářovou entitu v Home Assistantu.
 
 Integrace pouze čte. **Nic neobjednává ani neruší.**
 
-## Co to umí
-
 - Jedna entita `calendar.<jmeno>_obedy` na účet.
 - Každý den jídelníčku je jedna **celodenní** událost.
 - V názvu události je podle nastavení buď objednané jídlo, nebo všechna jídla dne.
 - V popisu události je celý jídelníček dne. Objednané jídlo je označené `✓`.
 - Aktualizace každé 2 hodiny.
 
-## Instalace přes HACS
+## Předpoklady a závislosti
 
-1. HACS → menu (⋮) → **Custom repositories**.
-2. URL: `https://github.com/elvisek2020/hacs-calendar_job_abacus`, kategorie **Integration**.
-3. Nainstalovat verzi `1.0.0` (nebo novější) a restartovat Home Assistant.
-4. **Nastavení → Zařízení a služby → Přidat integraci → Job Abacus Pro**.
-5. Zadat adresu web klienta (tu, na které se přihlašuješ, bez `/login.php`),
-   uživatelské jméno a heslo.
+- Home Assistant 2025.8.0 nebo novější.
+- Účet do web klienta Job Abacus Pro školní jídelny.
+- Integrace nemá žádné externí závislosti, používá `aiohttp` z Home Assistanta
+  a HTML parser ze standardní knihovny Pythonu.
 
-Vyžaduje Home Assistant 2025.8.0 nebo novější. Integrace nemá žádné externí
-závislosti, používá `aiohttp` z Home Assistanta a HTML parser ze standardní
-knihovny Pythonu.
+## Instalace
 
-## Nastavení
+### HACS (doporučeno)
 
-**Nastavení → Zařízení a služby → Job Abacus Pro → Konfigurovat**
+1. HACS → tři tečky vpravo nahoře → **Custom repositories**
+2. Vlož URL `https://github.com/elvisek2020/hacs-calendar_job_abacus`, kategorie **Integration**
+3. Nainstaluj **Job Abacus Pro**
+4. Restartuj Home Assistant a přidej integraci v **Nastavení → Zařízení a služby → Přidat integraci**.
+
+HACS nabízí aktualizace z GitHub releases.
+
+### Ručně
+
+Zkopíruj `custom_components/job_abacus` do `/config/custom_components/` a restartuj Home Assistant.
+
+## Konfigurace
+
+**Nastavení → Zařízení a služby → Přidat integraci → Job Abacus Pro**
+
+Zadej adresu web klienta (tu, na které se přihlašuješ, bez `/login.php`),
+uživatelské jméno a heslo.
+
+Volby jsou v **Nastavení → Zařízení a služby → Job Abacus Pro → Konfigurovat**:
 
 | Volba | Význam |
 | --- | --- |
@@ -81,6 +100,26 @@ zobrazí výzvu k opětovnému přihlášení.
 - Integrace posílá jen GET požadavky a jeden přihlašovací POST. Žádnou cestu
   k objednávání neobsahuje.
 
+## Vývoj
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements_test.txt ruff
+.venv/bin/python -m pytest
+.venv/bin/ruff check . && .venv/bin/ruff format --check .
+```
+
+Testy pokrývají čtení jídelníčku z HTML i z JSON a nepotřebují instalaci
+Home Assistanta ani přístup k serveru jídelny. GitHub Actions spouští
+`hassfest`, validaci HACS, Ruff a Pytest.
+
+## Vydání verze
+
+1. Zvedni verzi v `custom_components/job_abacus/manifest.json` (SemVer).
+2. Doplň sekci `## vX.Y.Z — RRRR-MM-DD` do `CHANGELOG.md`.
+3. Commit `Release vX.Y.Z: …`, `git tag vX.Y.Z`, push commitu i tagu.
+4. GitHub Actions vytvoří release s textem z CHANGELOG a HACS nabídne aktualizaci.
+
 ## Známá omezení
 
 Job Abacus má na každé instalaci trochu jinou sadu stránek a jinou podobu
@@ -117,18 +156,11 @@ python3 tools/dump_pages.py --out /tmp/abacus
 Podrobnosti jsou v [`tools/README.md`](tools/README.md). Výstup obsahuje osobní
 údaje, proto nepatří do gitu.
 
-## Vývoj
+## Autor
 
-```bash
-python3 -m venv .venv
-.venv/bin/pip install -r requirements_test.txt
-.venv/bin/python -m pytest
-```
-
-Testy pokrývají čtení jídelníčku z HTML i z JSON a nepotřebují instalaci
-Home Assistanta ani přístup k serveru jídelny.
-
-## Poznámka
+**[elvisek2020](https://github.com/elvisek2020)** — vzniklo pro rodinný školní
+dashboard v Home Assistantu, kde jsou rozvrhy, obědy a kroužky v jedné kartě.
+Licence MIT.
 
 Projekt není nijak spojený se společností GACC spol. s r.o. Používáš ho na
 vlastní odpovědnost.

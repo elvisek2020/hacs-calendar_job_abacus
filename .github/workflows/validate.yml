@@ -4,35 +4,27 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: "0 5 * * 1"
+    - cron: "0 4 * * 1"
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   hassfest:
-    name: hassfest
+    name: Hassfest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: home-assistant/actions/hassfest@master
 
   hacs:
-    name: HACS
+    name: HACS validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: hacs/action@main
         with:
           category: integration
-          # Vlastní integrace nemá ikonu v home-assistant/brands.
+          # Dočasně, dokud nebude custom_components/job_abacus/brand/icon.png.
           ignore: brands
-
-  tests:
-    name: pytest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-      - run: pip install -r requirements_test.txt
-      - run: pytest

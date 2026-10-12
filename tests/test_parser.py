@@ -199,9 +199,7 @@ def test_detail_ignores_the_week_grid_on_the_same_page() -> None:
     # Stránka detailu obsahuje i mřížku; ta nesmí přidat žádné jídlo.
     _, meals = parser.parse_day_detail(DETAIL_MONDAY)
 
-    assert [meal.name for meal in meals] == [
-        "Studený balíček - chléb, oplatek, nápoj"
-    ]
+    assert [meal.name for meal in meals] == ["Studený balíček - chléb, oplatek, nápoj"]
 
 
 def test_detail_without_menu_table_yields_no_meals() -> None:

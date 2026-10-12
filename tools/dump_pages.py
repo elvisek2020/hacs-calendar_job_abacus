@@ -84,9 +84,7 @@ class LinkCollector(HTMLParser):
         super().__init__()
         self.links: list[str] = []
 
-    def handle_starttag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         wanted = {"a": "href", "form": "action", "frame": "src", "iframe": "src"}
         if (attribute := wanted.get(tag)) is None:
             return
@@ -195,9 +193,7 @@ def dump_api(session: requests.Session, base_url: str, out: Path) -> None:
             payload = {"raw": text[:2000]}
 
         results[label] = payload
-        status = (
-            payload.get("Status") if isinstance(payload, dict) else "?"
-        )
+        status = payload.get("Status") if isinstance(payload, dict) else "?"
         print(f"  api.php {label}: HTTP {response.status_code}, Status {status}")
 
     target = out / "api.json"

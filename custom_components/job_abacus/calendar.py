@@ -36,9 +36,7 @@ def _to_event(lunch: LunchDay) -> CalendarEvent:
     )
 
 
-class JobAbacusLunchCalendar(
-    CoordinatorEntity[JobAbacusCoordinator], CalendarEntity
-):
+class JobAbacusLunchCalendar(CoordinatorEntity[JobAbacusCoordinator], CalendarEntity):
     """Kalendář s jedním celodenním záznamem na každý den jídelníčku."""
 
     _attr_attribution = ATTRIBUTION

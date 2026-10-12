@@ -1,0 +1,10 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# Fixtury jsou HTML převzaté ze serveru, zalomení by je změnilo.
+"tests/*" = ["E501"]

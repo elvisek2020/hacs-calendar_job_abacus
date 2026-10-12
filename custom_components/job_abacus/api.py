@@ -196,9 +196,7 @@ class JobAbacusClient:
 
         # Mřížka obsahuje jen stavy dnů, názvy jídel jsou až v detailech.
         details = (
-            await self._async_fetch_details(grid_html)
-            if grid_html is not None
-            else []
+            await self._async_fetch_details(grid_html) if grid_html is not None else []
         )
 
         return MenuSources(api_payload, grid_html, details)

@@ -448,9 +448,7 @@ def parse_day_detail(
         return day, []
 
     meals = [
-        meal
-        for row in table.rows
-        if (meal := _meal_from_detail_row(row)) is not None
+        meal for row in table.rows if (meal := _meal_from_detail_row(row)) is not None
     ]
     return day, meals
 
@@ -583,9 +581,7 @@ def _description(meals: list[Meal]) -> str | None:
     return "\n".join(lines) or None
 
 
-def build_lunch_days(
-    menu: dict[date, list[Meal]], summary_mode: str
-) -> list[LunchDay]:
+def build_lunch_days(menu: dict[date, list[Meal]], summary_mode: str) -> list[LunchDay]:
     """Převede jídelníček na celodenní záznamy řazené podle data."""
     return [
         LunchDay(

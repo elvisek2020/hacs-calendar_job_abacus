@@ -86,9 +86,7 @@ class JobAbacusConfigFlow(ConfigFlow, domain=DOMAIN):
         nepodaří; jinak by účet vznikl s trvale prázdným kalendářem.
         """
         # Session s vlastní cookie jar, jinak se `PHPSESSID` z IP adresy zahodí.
-        session = async_create_clientsession(
-            self.hass, cookie_jar=create_cookie_jar()
-        )
+        session = async_create_clientsession(self.hass, cookie_jar=create_cookie_jar())
         client = JobAbacusClient(session, base_url, username, password)
         try:
             await client.async_login()
